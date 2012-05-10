@@ -6,13 +6,13 @@ except ImportError:
     from distutils.core import setup
 
 config = {
-    'description'  : 'Project Euler utils + solutions',
+    'description'  : 'A harness for running Project Euler solutions',
     'author'       : 'Brandon Sandrowicz',
-    'url'          : 'http://github.com/bsandrow/project-euler',
+    'url'          : 'http://github.com/bsandrow/muzzler',
     'author_email' : 'brandon@sandrowicz.org',
     'version'      : 0.1.
-    'packages'     : [ 'project-euler' ],
-    'name'         : 'project-euler',
+    'packages'     : [ 'muzzler' ],
+    'name'         : 'muzzler',
     'test_suite'   : '',
 }
 

@@ -1,7 +1,7 @@
-project-euler
-============
+muzzler
+=======
 
-My project euler solutions + utils for building solutions.
+A harness for running [Project Euler][1] solutions in Python.
 
 Requirements
 ============

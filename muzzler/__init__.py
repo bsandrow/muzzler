@@ -3,6 +3,8 @@ import imp
 import sys
 import timeit
 
+problem_namespace = 'muzzler.problem'
+
 class ProblemDoesNotExistError(Exception):
     pass
 
@@ -35,7 +37,7 @@ def module_args():
     Used when module called directly as a script.
     """
     import argparse
-    parser = argparse.ArgumentParser(description='project_euler.harness')
+    parser = argparse.ArgumentParser(description='muzzler - A Project Euler harness.')
     parser.add_argument('-p','--problem', dest='problems', type=int, action='append', required=True,
                         help='The number of the problem to run solutions for')
     parser.add_argument('-r','--runs', type=int, default=1, help='Number of runs to average runtime over.')
@@ -43,7 +45,7 @@ def module_args():
 
 def load_problem(problem_number):
     try:
-        module_name = 'project_euler.problem.p%d' % problem_number
+        module_name = '%s.p%d' % (problem_namespace, problem_number)
         __import__(module_name)
         module = sys.modules[module_name]
         return module
