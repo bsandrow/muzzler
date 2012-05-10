@@ -28,5 +28,19 @@ def run_problem(problem_number, runs=1):
         print "    Answer      : %s" % module.answer
         print
 
+def module_args():
+    """ Load command-line options.
+
+    Used when module called directly as a script.
+    """
+    import argparse
+    parser = argparse.ArgumentParser(description='project_euler.harness')
+    parser.add_argument('-p','--problem', dest='problems', nargs='+', type=int, help='The number of the problem to run solutions for')
+    parser.add_argument('-r','--runs', type=int, default=1, help='Number of runs to average runtime over.')
+    return parser.parse_args()
+
 if __name__ == '__main__':
-    run_problem(1, runs=100)
+    options = module_args()
+    for problem in options.problems:
+        run_problem(problem, runs=options.runs)
+
