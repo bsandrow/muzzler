@@ -45,6 +45,7 @@ def load_problem(problem_number):
         module_name = 'project_euler.problem.p%d' % problem_number
         __import__(module_name)
         module = sys.modules[module_name]
+        return module
     except ImportError:
         raise ProblemDoesNotExistError("Could not load module %s: problem %d does not exist" % (module_name, problem_number))
 
