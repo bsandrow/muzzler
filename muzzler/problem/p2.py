@@ -14,6 +14,8 @@ def solution_1():
     answer = sum(i for i in fib())
 
 class FibonacciSequence(list):
+    iter_limit = None
+
     def __init__(self, init=None):
         init = init or [0,1]
         list.__init__(self)
@@ -23,6 +25,12 @@ class FibonacciSequence(list):
         while index >= len(self):
             self.append(self[-1] + self[-2])
         return list.__getitem__(self, index)
+
+    def __iter__(self):
+        i = 0
+        while self.iter_limit is None or i < self.iter_limit:
+            yield self[i]
+            i += 1
 
 def solution_2():
     global answer
