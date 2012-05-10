@@ -36,7 +36,8 @@ def module_args():
     """
     import argparse
     parser = argparse.ArgumentParser(description='project_euler.harness')
-    parser.add_argument('-p','--problem', dest='problems', nargs='+', type=int, help='The number of the problem to run solutions for')
+    parser.add_argument('-p','--problem', dest='problems', type=int, action='append', required=True,
+                        help='The number of the problem to run solutions for')
     parser.add_argument('-r','--runs', type=int, default=1, help='Number of runs to average runtime over.')
     return parser.parse_args()
 
