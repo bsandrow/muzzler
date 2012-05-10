@@ -3,6 +3,9 @@ import imp
 import sys
 import timeit
 
+class ProblemDoesNotExistError(Exception):
+    pass
+
 def time_solution(solution, runs=1):
     timer = timeit.Timer(stmt=solution)
     try:
@@ -12,9 +15,7 @@ def time_solution(solution, runs=1):
         timer.print_exc()
 
 def run_problem(problem_number, runs=1):
-    module_name = 'project_euler.problem.p%d' % problem_number
-    __import__(module_name)
-    module = sys.modules[module_name]
+    module = load_problem(problem_number)
 
     solutions = module.solutions
     print "%s:" % module.__name__
@@ -39,8 +40,19 @@ def module_args():
     parser.add_argument('-r','--runs', type=int, default=1, help='Number of runs to average runtime over.')
     return parser.parse_args()
 
+def load_problem(problem_number):
+    try:
+        module_name = 'project_euler.problem.p%d' % problem_number
+        __import__(module_name)
+        module = sys.modules[module_name]
+    except ImportError:
+        raise ProblemDoesNotExistError("Could not load module %s: problem %d does not exist" % (module_name, problem_number))
+
 if __name__ == '__main__':
     options = module_args()
     for problem in options.problems:
-        run_problem(problem, runs=options.runs)
+        try:
+            run_problem(problem, runs=options.runs)
+        except ProblemDoesNotExistError, e:
+            sys.exit("Error: %s" % e.message)
 
