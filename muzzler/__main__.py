@@ -11,7 +11,7 @@ def time_solution(solution, runs=1):
     timer = timeit.Timer(stmt=solution)
     try:
         runtime = timer.timeit(number=runs)
-        return runtime
+        return runtime / runs
     except:
         timer.print_exc()
 
