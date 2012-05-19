@@ -34,3 +34,5 @@ License
 =======
 
 LICENSE
+
+[1]: http://projecteuler.net
